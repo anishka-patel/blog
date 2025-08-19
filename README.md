@@ -1,11 +1,11 @@
-* Hi, this is Anishka Patel. 
+# Hi, this is Anishka Patel. 
 
-** This is place where is share my ideas, opinions along with some tips and tricks.
+## This is place where is share my ideas, opinions along with some tips and tricks.
 
-** If you find my blogs helpful. Then please give a github star on the repo. 
+## If you find my blogs helpful. Then please give a github star on the repo. 
 
-** Thankyou.
+## Thankyou.
 
-* Blogs
+# Blogs
 
 - [NixOS](./nixos-is-not-the-best-distro/blog.md)
