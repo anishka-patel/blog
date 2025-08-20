@@ -8,4 +8,13 @@
 
 # Blogs
 
-- [NixOS](./nixos-is-not-the-best-distro/blog.md)
+- [NixOS is not the best distro](./nixos-is-not-the-best-distro/blog.md)
+
+# Guides
+
+- [Linux admin is easy](./linux-admin-is-easy/guide.md)
+
+# Scripts
+
+# Configs
+

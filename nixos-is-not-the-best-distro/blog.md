@@ -1,3 +1,122 @@
+<!--toc:start-->
+- [NixOS is not the best distro 💥](#nixos-is-not-the-best-distro-💥)
+- [Introduction](#introduction)
+- [What is an OS](#what-is-an-os)
+  - [OS Functions](#os-functions)
+    - [Process Management](#process-management)
+    - [Memory Management](#memory-management)
+    - [Resource Management](#resource-management)
+    - [File Management](#file-management)
+    - [IO Management](#io-management)
+    - [Network Management](#network-management)
+    - [Security Management](#security-management)
+    - [Fault Management](#fault-management)
+    - [Recovery Management](#recovery-management)
+    - [Interface Management](#interface-management)
+  - [OS Components](#os-components)
+    - [Kernel 🥥](#kernel-🥥)
+    - [Drivers 🛠](#drivers-🛠)
+    - [Software 💽](#software-💽)
+  - [TLDR](#tldr)
+- [What are types of OSes](#what-are-types-of-oses)
+  - [Batch Operating System:](#batch-operating-system)
+  - [Time-sharing Operating System:](#time-sharing-operating-system)
+  - [Distributed Operating System:](#distributed-operating-system)
+  - [Network Operating System:](#network-operating-system)
+  - [Real-time Operating System:](#real-time-operating-system)
+  - [Multiprocessing Operating System:](#multiprocessing-operating-system)
+  - [Single-User Operating Systems:](#single-user-operating-systems)
+  - [Multi-User Operating Systems:](#multi-user-operating-systems)
+  - [Embedded Operating Systems:](#embedded-operating-systems)
+  - [Cluster Operating Systems:](#cluster-operating-systems)
+- [What are different OSes](#what-are-different-oses)
+  - [TLDR](#tldr)
+- [What is Distro](#what-is-distro)
+  - [OS Components for Distro](#os-components-for-distro)
+    - [Kernel → Linux Kernel](#kernel-linux-kernel)
+    - [Drivers → Open Source Drivers](#drivers-open-source-drivers)
+    - [Software → GNU / Non GNU](#software-gnu-non-gnu)
+  - [TIP](#tip)
+  - [TLDR](#tldr)
+- [What are different distros](#what-are-different-distros)
+  - [Based on Dependence Stage](#based-on-dependence-stage)
+    - [Independent/Upstream Distros](#independentupstream-distros)
+    - [Dependent/Downstream Distros](#dependentdownstream-distros)
+  - [Based on Package Managers](#based-on-package-managers)
+    - [Dpkg, Apt → Debian, Ubuntu](#dpkg-apt-debian-ubuntu)
+    - [Pacman → Arch Linux, Manjaro](#pacman-arch-linux-manjaro)
+    - [RPM, DNF → Fedora, RHEL](#rpm-dnf-fedora-rhel)
+    - [**NIX** → Nix OS](#nix-nix-os)
+    - [**Distro-agnostic Package Managers**](#distro-agnostic-package-managers)
+  - [Based on Application](#based-on-application)
+    - [Server ](#server-)
+    - [Workstation 󰍹](#workstation-󰍹)
+    - [Personal 󰌢](#personal-󰌢)
+    - [TLDR](#tldr)
+  - [Based on Release cycle](#based-on-release-cycle)
+    - [Rolling Release ](#rolling-release-)
+    - [Point Release ](#point-release-)
+    - [Hybrid Release ↻](#hybrid-release)
+  - [Emerging Class of Distros](#emerging-class-of-distros)
+    - [Atomic 󰚤](#atomic-󰚤)
+    - [Immutable 󰏗](#immutable-󰏗)
+    - [Declarative 󱇧](#declarative-󱇧)
+    - [Transactional ](#transactional-)
+    - [Example](#example)
+    - [TLDR](#tldr)
+- [What is the difference b/w Distro and OS](#what-is-the-difference-bw-distro-and-os)
+- [How distributions achieve immutability](#how-distributions-achieve-immutability)
+  - [Two variables of the immutable OS equation](#two-variables-of-the-immutable-os-equation)
+  - [How its actually used](#how-its-actually-used)
+  - [Flatpak/Brew](#flatpakbrew)
+  - [NIX/GUIX](#nixguix)
+  - [FS-Snapshot](#fs-snapshot)
+  - [APX/Distrobox/Toolbox](#apxdistroboxtoolbox)
+  - [AB-Root](#ab-root)
+  - [OS-Tree](#os-tree)
+  - [NIX](#nix)
+- [What is Nix](#what-is-nix)
+  - [Nix Components/Ecosystem](#nix-componentsecosystem)
+  - [Nix Specific features](#nix-specific-features)
+    - [nix-shell](#nix-shell)
+    - [nix-env](#nix-env)
+    - [nix-flakes](#nix-flakes)
+    - [nix-store](#nix-store)
+- [What is NixOS](#what-is-nixos)
+- [Why NixOS is not (like) a Distro](#why-nixos-is-not-like-a-distro)
+  - [Comparison of philosophies](#comparison-of-philosophies)
+  - [Convention/Learning Issues](#conventionlearning-issues)
+    - [Arch vs Nix: `ls -l /`](#arch-vs-nix-ls-l)
+  - [Simplicity/Compatibility Issues](#simplicitycompatibility-issues)
+    - [Arch vs Nix: `ls -l /etc`](#arch-vs-nix-ls-l-etc)
+  - [Performance/Availability Issues](#performanceavailability-issues)
+    - [Arch vs Nix: `ls -l /usr/bin`](#arch-vs-nix-ls-l-usrbin)
+- [Why NixOS is "THE" best OS](#why-nixos-is-the-best-os)
+  - [Deprecating awesome technologies](#deprecating-awesome-technologies)
+    - [Container Management Tools](#container-management-tools)
+    - [**Package Management Tools**](#package-management-tools)
+    - [**Environment Management Tools**](#environment-management-tools)
+    - [**Configuration Management Tools**](#configuration-management-tools)
+    - [**Home Management Tools**](#home-management-tools)
+    - [**User Management Tools**](#user-management-tools)
+    - [**Build Management Tools**](#build-management-tools)
+    - [**Version Management Tools**](#version-management-tools)
+    - [NOTE:](#note)
+  - [For target audience](#for-target-audience)
+    - [**developers/coders**](#developerscoders)
+    - [**sysadmins/devops**](#sysadminsdevops)
+    - [**hackers/tinkerers**](#hackerstinkerers)
+    - [**producers/creators**](#producerscreators)
+  - [For every one else](#for-every-one-else)
+    - [**Who can work with CLI**](#who-can-work-with-cli)
+    - [**Who can work with GUI**](#who-can-work-with-gui)
+    - [**Who only want to game**](#who-only-want-to-game)
+  - [So what am I using](#so-what-am-i-using)
+<!--toc:end-->
+
+# NixOS is not the best distro 💥 
+
+
 # Introduction
 
 `🖥Computers are essential, computers are ubiquitous, computer are stupid`
@@ -83,6 +202,8 @@ interactions between them convenient, user-friendly, and intuitive.
 
 | Core software that interacts with the general hardware |
 |--------------------------------------------------------|
+
+
 | **Windows** | **GNU/Linux** | **macOS**  | **FreeBSD** |
 |-------------|---------------|------------|-------------|
 | NT Kernel   | Linux Kernel  | XNU Kernel | BSD Kernel  |
@@ -91,6 +212,7 @@ interactions between them convenient, user-friendly, and intuitive.
 
 | Modular software that interacts with specific hardware |
 |--------------------------------------------------------|
+
 
 | **Network** | **Graphics** | **Audio**   | **Input** | **Misc.** |
 |-------------|--------------|-------------|-----------|-----------|
@@ -102,6 +224,7 @@ interactions between them convenient, user-friendly, and intuitive.
 
 | Top level unique software that handle specific processes |
 |----------------------------------------------------------|
+
 
 | **Bootloader**      | **Init System**        | **Software Manager**  |
 |---------------------|------------------------|-----------------------|
@@ -334,7 +457,7 @@ Probably the most advanced package manager
     - Flatpak : Sandboxed Applications
 
     `A package manager that tries to become a universal packaging solution`
-    `only dawrfed by tar -xvf`
+    `only dwarfed by tar -xvf`
 
     - **NIX** : All of the above
 
@@ -702,7 +825,7 @@ width="720" />
 `Pyenv` `Dotenv` `Direnv` `Node` Replaced by `nix develop` Replaced by
 `devenv.nix`
 
-### **Confiuration Management Tools**
+### **Configuration Management Tools**
 
 `JSON` `YAML` `Ansible` Replaced by `/etc/configuration.nix` Replaced by
 `/home/user/.config/nix/nix.conf` Replaced by `flake.nix`
